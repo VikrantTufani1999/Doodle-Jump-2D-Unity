@@ -21,8 +21,13 @@ public class GetInvisiblePlatformController : MonoBehaviour
 
         if(collision.gameObject.tag == "Player")
         {
-            gameObject.SetActive(false);
+            Invoke("SetInactive", 1f);
             //Set current Platform Inactive.
         }
+    }
+
+    void SetInactive()
+    {
+        gameObject.SetActive(false);
     }
 }
