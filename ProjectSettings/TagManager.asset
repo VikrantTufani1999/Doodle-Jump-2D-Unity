@@ -7,6 +7,10 @@ TagManager:
   - Cracked
   - Platform
   - Enemy
+  - AutoInvisible
+  - GetInvisible
+  - LeftRight
+  - UpDown
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,8 @@ public class Accelerometer : MonoBehaviour
     float moveSpeed = 10f;
     bool facingLeft;
 
+    private SpriteRenderer flipToggle;
+
     Collider2D colliders;
 
     void Start()
@@ -18,13 +20,13 @@ public class Accelerometer : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();    // Fetch Rigidbody component
         colliders = GetComponent<Collider2D>();         // Fetch collider component
         facingLeft = true;          // Toggle (Not working)
+        flipToggle = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         var horizontal = Input.GetAxis("Horizontal");       // Get Horizontal component 
 
-        Flip(horizontal);           // Calling the flip function
 
 
         //  Code to move player according to device motion control 
@@ -48,13 +50,26 @@ public class Accelerometer : MonoBehaviour
 
         rigid.AddForce(tilt);
 
-        if(this.transform.position.y < -48f)            // End game if this is true.
+        Flip(horizontal);           // Calling the flip function
+
+        if (this.transform.position.y < -48f)            // End game if this is true.
         {
             LoadEndScene();
         }
     }
 
-    void Flip(float horizontal)             // Function to flip character (_Not functional_)
+    void Flip(float horizontal)
+    {
+        if(transform.position.x > 0)
+        {
+            flipToggle.flipX = true;
+        }
+        if(transform.position.x < 0)
+        {
+            flipToggle.flipX = false;
+        }
+    }
+    /*void Flip(float horizontal)             // Function to flip character (_Not functional_)
     {
         if ((horizontal > 0 && facingLeft == true) || (horizontal < 0 && facingLeft == false))
         {
@@ -66,7 +81,7 @@ public class Accelerometer : MonoBehaviour
 
             transform.localScale = theScale;
         }
-    }
+    }*/
 
     private void OnCollisionEnter2D(Collision2D collision)          
     {   

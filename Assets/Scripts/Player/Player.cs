@@ -16,11 +16,14 @@ public class Player : MonoBehaviour
 
     private bool facingLeft;
 
+    private SpriteRenderer flipToggle;
+
     void Start()
     {   
         rb = GetComponent<Rigidbody2D>();           // Fetch rigidbody component
         colliders = GetComponent<Collider2D>();     // Fetch collider component
         facingLeft = true;          // bool variable for toggle purpose
+        flipToggle = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -51,7 +54,19 @@ public class Player : MonoBehaviour
                
     }
 
-    void Flip(float horizontal)                 // Code to flip the character according to movement upwards.
+    void Flip(float horizontal)
+    {
+        if (transform.position.x > 0)
+        {
+            flipToggle.flipX = true;
+        }
+        if (transform.position.x < 0)
+        {
+            flipToggle.flipX = false;
+        }
+    }
+
+    /*void Flip(float horizontal)                 // Code to flip the character according to movement upwards.
     {
         if((movement/movementSpeed > 0 && facingLeft == true) || (movement/movementSpeed < 0 && facingLeft == false))
         {
@@ -63,7 +78,7 @@ public class Player : MonoBehaviour
 
             transform.localScale = theScale;
         }
-    }
+    }*/
 
     void EndScene()
     {
