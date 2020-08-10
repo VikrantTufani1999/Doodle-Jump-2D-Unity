@@ -11,6 +11,14 @@ public class Enemy : MonoBehaviour
         explosion = GetComponent<Animator>();           // Fetch reference
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            explosion.SetTrigger("Explosion");                      // Trigger Explosion Animation
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")

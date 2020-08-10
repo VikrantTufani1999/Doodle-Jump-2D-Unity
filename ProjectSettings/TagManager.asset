@@ -11,6 +11,8 @@ TagManager:
   - GetInvisible
   - LeftRight
   - UpDown
+  - rocket
+  - spring
   layers:
   - Default
   - TransparentFX

@@ -18,12 +18,16 @@ public class Player : MonoBehaviour
 
     private SpriteRenderer flipToggle;
 
+    RocketMovement link;
+
     void Start()
     {   
         rb = GetComponent<Rigidbody2D>();           // Fetch rigidbody component
         colliders = GetComponent<Collider2D>();     // Fetch collider component
         facingLeft = true;          // bool variable for toggle purpose
         flipToggle = GetComponent<SpriteRenderer>();
+
+        link = FindObjectOfType<RocketMovement>();
     }
 
     void Update()
@@ -50,6 +54,24 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
             colliders.enabled = !colliders.enabled;
+        }
+
+        if(collision.gameObject.tag == "rocket")
+        {
+            Vector2 velocity = rb.velocity;
+            velocity.y = 40;
+            rb.velocity = velocity;
+
+            //link.isHit = false;
+        }
+
+        if(collision.gameObject.tag == "spring")
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+
+            transform.Rotate(new Vector3(0, 0, 360) * Time.deltaTime);
+
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
                
     }
@@ -79,6 +101,8 @@ public class Player : MonoBehaviour
             transform.localScale = theScale;
         }
     }*/
+
+
 
     void EndScene()
     {

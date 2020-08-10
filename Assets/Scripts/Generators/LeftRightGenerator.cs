@@ -5,6 +5,7 @@ using UnityEngine;
 public class LeftRightGenerator : MonoBehaviour
 {
     public GameObject LeftRightPrefab;          // Prefab which needs to be instantiated
+    Transform parent;
 
     //Declarations
     public int countOfPlatforms2 = 10;         
@@ -14,6 +15,7 @@ public class LeftRightGenerator : MonoBehaviour
 
     private void Start()
     {
+        parent = GetComponent<Transform>();
         Vector3 spawnLeftRight = new Vector3();             // Vector to store position of instantiated object
 
         for (int i = 0; i < countOfPlatforms2; i++)
@@ -22,6 +24,7 @@ public class LeftRightGenerator : MonoBehaviour
             spawnLeftRight.y += Random.Range(minY3, maxY3);         // Randomize Y position of instantiation
             spawnLeftRight.x = Random.Range(-width2, width2);       // Randomize X position of instantiation
             var instance = Instantiate(LeftRightPrefab, spawnLeftRight, Quaternion.identity);   // Instantiation
+            instance.transform.SetParent(parent);
             // Debug.Log(instance.transform.position.y);        // Just to check y positions of the instantiated objects.
 
         }
